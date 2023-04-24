@@ -3,7 +3,7 @@ import React from "react";
 const Body: React.FC = () => {
   return (
     <div className="container mx-auto">
-      <h1 className="text-5xl my-4">Welcome to EquityGPT!</h1>
+      <h1 className="text-7xl my-9">Welcome to EquityGPT!</h1>
       <h3 className="text-stone-600 font-medium">
         You can now ask questions to search through Earnings Call Transcripts!
       </h3>
