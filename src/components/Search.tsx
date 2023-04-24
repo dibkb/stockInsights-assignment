@@ -24,14 +24,14 @@ const Search: React.FC = () => {
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
-  const toggleElement = (element: timeOptions) => {
-    element.selected = !element.selected;
-  };
   const selectItemHandler = (element: timeOptions) => {
-    toggleElement(element);
     const match = timeOptionsSelected.filter((items) => items === element);
     if (!match.length) {
       setTimeOptionsSelected((prev) => [...prev, element]);
+      element.selected = true;
+    } else {
+      setTimeOptionsSelected((prev) => prev.filter((item) => item !== element));
+      element.selected = false;
     }
   };
   return (
