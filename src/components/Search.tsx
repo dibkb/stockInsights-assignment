@@ -1,4 +1,7 @@
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import {
+  AdjustmentsHorizontalIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import React, { useState } from "react";
@@ -26,7 +29,7 @@ const Search: React.FC = () => {
         <AdjustmentsHorizontalIcon className="h-6 w-6 " />
         <p className="text-sm">Filter search</p>
       </span>
-      <div className="relative">
+      <div className="relative select-none">
         <section
           onClick={() => {
             setSelectTime((prev) => !prev);
@@ -62,7 +65,7 @@ const Search: React.FC = () => {
           </section>
         )}
       </div>
-      <div className="relative">
+      <div className="relative select-none">
         <section
           onClick={() => {
             setSelectStock((prev) => !prev);
@@ -78,6 +81,10 @@ const Search: React.FC = () => {
         </section>
         {selectStock && (
           <section className="absolute border w-full rounded-lg shadow-md flex flex-col">
+            <div className="px-4 py-2 flex items-center gap-2 justify-between">
+              <MagnifyingGlassIcon className="h-4 w-4" />
+              <input type="text" placeholder="Search" className="w-[90%] p-1" />
+            </div>
             {stockOptionsList.map((element) => (
               <div
                 key={element.id}
