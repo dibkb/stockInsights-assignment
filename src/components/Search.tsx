@@ -1,21 +1,15 @@
-import { SparklesIcon } from "@heroicons/react/20/solid";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import React, { useState } from "react";
-const timeOptions = [
-  { id: 1, value: "Q1 FY22" },
-  { id: 2, value: "Q2 FY22" },
-  { id: 3, value: "Q3 FY22" },
-  { id: 4, value: "Q4 FY22" },
-  { id: 5, value: "Q1 FY23" },
-];
-const timeDropDownContent = timeOptions.map((element) => (
-  <div key={element.id}>
-    <p className="text-sm font-medium">{element.value}</p>
-  </div>
-));
+import { timeOptionsList, timeOptions } from "../data/Time";
 const Search: React.FC = () => {
   const [selectTime, setSelectTime] = useState<boolean>(false);
+  const [timeOptionsSelected, setTimeOptionsSelected] = useState<timeOptions[]>(
+    []
+  );
+  const [timeOptionsAvailable, setTimeOptionsAvailable] =
+    useState<timeOptions[]>(timeOptionsList);
   return (
     <div className="container mx-auto flex gap-3">
       <span className="text-stone-800 flex gap-2 items-center">
@@ -30,11 +24,44 @@ const Search: React.FC = () => {
           className="flex items-center justify-between w-[180px] border border-stone-300 p-2 rounded-lg cursor-pointer bg-stone-200 text-sm font-medium "
         >
           <p>Any time</p>
-          <ChevronDownIcon className="h-5 w-5" />
+          {selectTime ? (
+            <ChevronDownIcon className="h-5 w-5" />
+          ) : (
+            <ChevronUpIcon className="h-5 w-5" />
+          )}
         </section>
         {selectTime && (
-          <section className="absolute border w-full px-4 py-2 rounded-lg">
-            {timeDropDownContent}
+          <section className="absolute border w-full rounded-lg shadow-md flex flex-col">
+            {timeOptionsSelected.map((element) => (
+              <div
+                key={element.id}
+                onClick={() => {
+                  setTimeOptionsSelected((prev) => [...prev, element]);
+                  setTimeOptionsAvailable((prev) =>
+                    prev.filter((item) => item !== element)
+                  );
+                }}
+                className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
+              >
+                <MdCheckBox />
+                <p className="text-xs font-medium">{element.value}</p>
+              </div>
+            ))}
+            {timeOptionsAvailable.map((element) => (
+              <div
+                key={element.id}
+                onClick={() => {
+                  setTimeOptionsSelected((prev) => [...prev, element]);
+                  setTimeOptionsAvailable((prev) =>
+                    prev.filter((item) => item !== element)
+                  );
+                }}
+                className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
+              >
+                <MdCheckBoxOutlineBlank />
+                <p className="text-xs font-medium">{element.value}</p>
+              </div>
+            ))}
           </section>
         )}
       </div>
