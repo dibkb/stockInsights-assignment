@@ -19,13 +19,11 @@ const Search: React.FC = () => {
   const [timeOptionsSelected, setTimeOptionsSelected] = useState<timeOptions[]>(
     []
   );
-  const [timeOptions, setTimeOptions] =
-    useState<timeOptions[]>(timeOptionsList);
+  const [timeOptions] = useState<timeOptions[]>(timeOptionsList);
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
-  const [stockOptions, setStockOptions] =
-    useState<stockOptions[]>(stockOptionsList);
+  const [stockOptions] = useState<stockOptions[]>(stockOptionsList);
   const selectTimeItemHandler = useCallback(
     (element: timeOptions) => {
       const match = timeOptionsSelected.filter((items) => items === element);
