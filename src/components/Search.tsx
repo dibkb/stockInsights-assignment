@@ -48,7 +48,7 @@ const Search: React.FC = () => {
             )}
           </section>
           {selectTime && (
-            <section className="absolute border w-full rounded-lg shadow-md flex flex-col">
+            <section className="absolute z-10 bg-white border w-full rounded-lg shadow-md flex flex-col">
               {timeOptionsList.map((element) => (
                 <div
                   key={element.id}
@@ -84,7 +84,7 @@ const Search: React.FC = () => {
             )}
           </section>
           {selectStock && (
-            <section className="absolute border w-full rounded-lg shadow-md flex flex-col">
+            <section className="absolute z-10 bg-white border w-full rounded-lg shadow-md flex flex-col">
               <div className="px-4 py-2 flex items-center gap-1">
                 <MagnifyingGlassIcon className="h-4 w-4" />
                 <input
