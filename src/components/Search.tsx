@@ -10,6 +10,9 @@ const Search: React.FC = () => {
   );
   const [timeOptionsAvailable, setTimeOptionsAvailable] =
     useState<timeOptions[]>(timeOptionsList);
+  const selectElement = (element: timeOptions) => {
+    element.selected = !element.selected;
+  };
   return (
     <div className="container mx-auto flex gap-3">
       <span className="text-stone-800 flex gap-2 items-center">
@@ -32,33 +35,20 @@ const Search: React.FC = () => {
         </section>
         {selectTime && (
           <section className="absolute border w-full rounded-lg shadow-md flex flex-col">
-            {timeOptionsSelected.map((element) => (
-              <div
-                key={element.id}
-                onClick={() => {
-                  setTimeOptionsSelected((prev) => [...prev, element]);
-                  setTimeOptionsAvailable((prev) =>
-                    prev.filter((item) => item !== element)
-                  );
-                }}
-                className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
-              >
-                <MdCheckBox />
-                <p className="text-xs font-medium">{element.value}</p>
-              </div>
-            ))}
             {timeOptionsAvailable.map((element) => (
               <div
                 key={element.id}
                 onClick={() => {
                   setTimeOptionsSelected((prev) => [...prev, element]);
-                  setTimeOptionsAvailable((prev) =>
-                    prev.filter((item) => item !== element)
-                  );
+                  selectElement(element);
                 }}
                 className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
               >
-                <MdCheckBoxOutlineBlank />
+                {element.selected ? (
+                  <MdCheckBox className="text-blue-700" />
+                ) : (
+                  <MdCheckBoxOutlineBlank />
+                )}
                 <p className="text-xs font-medium">{element.value}</p>
               </div>
             ))}
