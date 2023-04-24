@@ -1,4 +1,5 @@
 import Body from "./components/Body";
+import List from "./components/List";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 
@@ -8,6 +9,7 @@ function App() {
       <Navbar />
       <Body />
       <Search />
+      <List />
     </>
   );
 }
