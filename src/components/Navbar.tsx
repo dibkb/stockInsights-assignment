@@ -4,9 +4,9 @@ const Navbar: React.FC = () => {
     <>
       <div className="bg-sky-50 py-3">
         <div className="container mx-auto">
-          <section className="flex gap-3">
+          <section className="flex gap-3 items-center">
             <p className="font-medium text-stone-900">StockInsights</p>
-            <p className="bg-stone-800 rounded-md text-white px-3 py-1 text-xs font-base">
+            <p className="bg-stone-900 rounded-md text-white px-3 py-1 text-xs font-base">
               Beta
             </p>
           </section>
