@@ -12,6 +12,7 @@ import {
   stockOptions,
 } from "../data/data";
 import FilteredItem from "./FilteredItem";
+// search bart import
 import { SearchBar } from "./SearchBar";
 const Search: React.FC = () => {
   const [selectTime, setSelectTime] = useState<boolean>(false);
