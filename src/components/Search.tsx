@@ -147,7 +147,6 @@ const Search: React.FC = () => {
           )}
         </div>
       </div>
-      <p className="text-center my-8">You are looking for?</p>
       <FilteredItem
         timeSelected={timeOptionsSelected}
         stockSelected={stockOptionsSelected}
