@@ -6,3 +6,6 @@
 html {
   font-family: "Inter", sans-serif;
 }
+input {
+  outline: none;
+}
