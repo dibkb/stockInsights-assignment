@@ -1,11 +1,15 @@
 import React from "react";
 import { timeOptions } from "../data/data";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-const FilteredItem: React.FC<FilteredItem> = ({ timeSelected }) => {
+const FilteredItem: React.FC<FilteredItem> = ({
+  timeSelected,
+  removeItemHandler,
+}) => {
   return (
     <div className="flex gap-3">
       {timeSelected.map((element) => (
         <span
+          onClick={() => removeItemHandler(element)}
           key={element.value}
           className="text-sm flex gap-1 items-center border border-stone-500 px-4 py-2 rounded-full"
         >
@@ -18,5 +22,6 @@ const FilteredItem: React.FC<FilteredItem> = ({ timeSelected }) => {
 };
 interface FilteredItem {
   timeSelected: timeOptions[];
+  removeItemHandler: any;
 }
 export default FilteredItem;

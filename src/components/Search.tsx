@@ -4,7 +4,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   timeOptionsList,
   timeOptions,
@@ -24,16 +24,25 @@ const Search: React.FC = () => {
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
-  const selectItemHandler = (element: timeOptions) => {
-    const match = timeOptionsSelected.filter((items) => items === element);
-    if (!match.length) {
-      setTimeOptionsSelected((prev) => [...prev, element]);
-      element.selected = true;
-    } else {
-      setTimeOptionsSelected((prev) => prev.filter((item) => item !== element));
-      element.selected = false;
-    }
-  };
+  const selectItemHandler = useCallback(
+    (element: timeOptions) => {
+      const match = timeOptionsSelected.filter((items) => items === element);
+      if (!match.length) {
+        setTimeOptionsSelected((prev) => [...prev, element]);
+        element.selected = true;
+      } else {
+        setTimeOptionsSelected((prev) =>
+          prev.filter((item) => item !== element)
+        );
+        element.selected = false;
+      }
+    },
+    [timeOptionsSelected]
+  );
+  const removeItemHandler = useCallback((element: timeOptions) => {
+    setTimeOptionsSelected((prev) => prev.filter((item) => item !== element));
+    element.selected = false;
+  }, []);
   return (
     <div className="container mx-auto">
       <SearchBar />
@@ -122,7 +131,10 @@ const Search: React.FC = () => {
       </div>
       {JSON.stringify(timeOptions)}
       <p className="text-center my-8">You are looking for?</p>
-      <FilteredItem timeSelected={timeOptionsSelected} />
+      <FilteredItem
+        timeSelected={timeOptionsSelected}
+        removeItemHandler={removeItemHandler}
+      />
     </div>
   );
 };
