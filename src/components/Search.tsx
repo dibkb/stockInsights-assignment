@@ -24,7 +24,9 @@ const Search: React.FC = () => {
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
-  const selectItemHandler = useCallback(
+  const [stockOptions, setStockOptions] =
+    useState<stockOptions[]>(stockOptionsList);
+  const selectTimeItemHandler = useCallback(
     (element: timeOptions) => {
       const match = timeOptionsSelected.filter((items) => items === element);
       if (!match.length) {
@@ -39,8 +41,27 @@ const Search: React.FC = () => {
     },
     [timeOptionsSelected]
   );
-  const removeItemHandler = useCallback((element: timeOptions) => {
+  const removeTimeItemHandler = useCallback((element: timeOptions) => {
     setTimeOptionsSelected((prev) => prev.filter((item) => item !== element));
+    element.selected = false;
+  }, []);
+  const selectStockItemHandler = useCallback(
+    (element: timeOptions) => {
+      const match = stockOptionsSelected.filter((items) => items === element);
+      if (!match.length) {
+        setStockOptionsSelected((prev) => [...prev, element]);
+        element.selected = true;
+      } else {
+        setStockOptionsSelected((prev) =>
+          prev.filter((item) => item !== element)
+        );
+        element.selected = false;
+      }
+    },
+    [stockOptionsSelected]
+  );
+  const removeStockItemHandler = useCallback((element: timeOptions) => {
+    setStockOptionsSelected((prev) => prev.filter((item) => item !== element));
     element.selected = false;
   }, []);
   return (
@@ -70,7 +91,7 @@ const Search: React.FC = () => {
               {timeOptions.map((element) => (
                 <div
                   key={element.id}
-                  onClick={() => selectItemHandler(element)}
+                  onClick={() => selectTimeItemHandler(element)}
                   className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
                 >
                   {element.selected ? (
@@ -108,13 +129,10 @@ const Search: React.FC = () => {
                   className="max-w-[81%] grow p-1"
                 />
               </div>
-              {stockOptionsList.map((element) => (
+              {stockOptions.map((element) => (
                 <div
                   key={element.id}
-                  onClick={() => {
-                    setStockOptionsSelected((prev) => [...prev, element]);
-                    toggleElement(element);
-                  }}
+                  onClick={() => selectStockItemHandler(element)}
                   className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
                 >
                   {element.selected ? (
@@ -129,11 +147,12 @@ const Search: React.FC = () => {
           )}
         </div>
       </div>
-      {JSON.stringify(timeOptions)}
       <p className="text-center my-8">You are looking for?</p>
       <FilteredItem
         timeSelected={timeOptionsSelected}
-        removeItemHandler={removeItemHandler}
+        stockSelected={stockOptionsSelected}
+        removeTimeItemHandler={removeTimeItemHandler}
+        removeStockItemHandler={removeStockItemHandler}
       />
     </div>
   );
