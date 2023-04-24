@@ -8,11 +8,11 @@ const Body: React.FC = () => {
         You can now ask questions to search through Earnings Call Transcripts!
       </h3>
       <section className="flex gap-2 items-center my-5">
-        <span className="text-amber-500 flex gap-2 items-center">
-          <ExclamationTriangleIcon className="h-6 w-6 " />
+        <span className="text-amber-500 flex gap-2 items-center text-xs">
+          <ExclamationTriangleIcon className="h-4 w-4 " />
           <p className="font-medium">Please Note</p>
         </span>
-        <p className="text-sm text-stone-500">
+        <p className="text-xs text-stone-700">
           This is a beta version. We are in the process of adding more data and
           improving the search.
         </p>

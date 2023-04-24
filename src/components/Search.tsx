@@ -11,6 +11,7 @@ import {
   stockOptionsList,
   stockOptions,
 } from "../data/data";
+import FilteredItem from "./FilteredItem";
 import { SearchBar } from "./searchBar";
 const Search: React.FC = () => {
   const [selectTime, setSelectTime] = useState<boolean>(false);
@@ -113,6 +114,8 @@ const Search: React.FC = () => {
           )}
         </div>
       </div>
+      <p className="text-center my-8">You are looking for?</p>
+      <FilteredItem timeSelected={timeOptionsSelected} />
     </div>
   );
 };
