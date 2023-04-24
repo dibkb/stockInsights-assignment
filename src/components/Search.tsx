@@ -19,11 +19,20 @@ const Search: React.FC = () => {
   const [timeOptionsSelected, setTimeOptionsSelected] = useState<timeOptions[]>(
     []
   );
+  const [timeOptions, setTimeOptions] =
+    useState<timeOptions[]>(timeOptionsList);
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
   const toggleElement = (element: timeOptions) => {
     element.selected = !element.selected;
+  };
+  const selectItemHandler = (element: timeOptions) => {
+    toggleElement(element);
+    const match = timeOptionsSelected.filter((items) => items === element);
+    if (!match.length) {
+      setTimeOptionsSelected((prev) => [...prev, element]);
+    }
   };
   return (
     <div className="container mx-auto">
@@ -31,7 +40,7 @@ const Search: React.FC = () => {
       <div className=" flex gap-3">
         <span className="text-stone-800 flex gap-2 items-center">
           <AdjustmentsHorizontalIcon className="h-6 w-6 " />
-          <p className="text-sm">Filter search</p>
+          <p className="text-sm">Search within</p>
         </span>
         <div className="relative select-none">
           <section
@@ -49,13 +58,10 @@ const Search: React.FC = () => {
           </section>
           {selectTime && (
             <section className="absolute z-10 bg-white border w-full rounded-lg shadow-md flex flex-col">
-              {timeOptionsList.map((element) => (
+              {timeOptions.map((element) => (
                 <div
                   key={element.id}
-                  onClick={() => {
-                    setTimeOptionsSelected((prev) => [...prev, element]);
-                    toggleElement(element);
-                  }}
+                  onClick={() => selectItemHandler(element)}
                   className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
                 >
                   {element.selected ? (
@@ -114,6 +120,7 @@ const Search: React.FC = () => {
           )}
         </div>
       </div>
+      {JSON.stringify(timeOptions)}
       <p className="text-center my-8">You are looking for?</p>
       <FilteredItem timeSelected={timeOptionsSelected} />
     </div>
