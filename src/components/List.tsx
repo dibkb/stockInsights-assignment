@@ -5,7 +5,7 @@ const List: React.FC = () => {
   return (
     <div className="sm:container max-w-[90%] mx-auto">
       <p className="text-2xl font-bold my-9">Latest Concall Transcripts</p>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mb-12 sm:mb-9">
         {Items.map((element) => (
           <div key={element.id}>
             <span className="flex sm:justify-between items-start flex-col sm:flex-row ">
