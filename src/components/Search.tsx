@@ -4,7 +4,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   timeOptionsList,
   timeOptions,
@@ -15,6 +15,8 @@ import FilteredItem from "./FilteredItem";
 // search bart import
 import { SearchBar } from "./newSearchBar";
 const Search: React.FC = () => {
+  const stockContainerRef = useRef<HTMLDivElement>(null);
+  const timeContainerRef = useRef<HTMLDivElement>(null);
   const [selectTime, setSelectTime] = useState<boolean>(false);
   const [selectStock, setSelectStock] = useState<boolean>(false);
   const [timeOptionsSelected, setTimeOptionsSelected] = useState<timeOptions[]>(
@@ -25,6 +27,31 @@ const Search: React.FC = () => {
     stockOptions[]
   >([]);
   const [stockOptions] = useState<stockOptions[]>(stockOptionsList);
+  // ==========================handle outside click=====================
+  const handleClickOutsideStock = (event: MouseEvent): void => {
+    if (
+      stockContainerRef.current &&
+      !stockContainerRef.current.contains(event.target as Node)
+    ) {
+      setSelectStock(false);
+    }
+  };
+  const handleClickOutsideTime = (event: MouseEvent): void => {
+    if (
+      timeContainerRef.current &&
+      !timeContainerRef.current.contains(event.target as Node)
+    ) {
+      setSelectTime(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutsideStock, true);
+    document.addEventListener("click", handleClickOutsideTime, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutsideStock, true);
+      document.removeEventListener("click", handleClickOutsideTime, true);
+    };
+  });
   const selectTimeItemHandler = useCallback(
     (element: timeOptions) => {
       const match = timeOptionsSelected.filter((items) => items === element);
@@ -71,7 +98,7 @@ const Search: React.FC = () => {
           <AdjustmentsHorizontalIcon className="h-6 w-6 " />
           <p className="text-sm">Search within</p>
         </span>
-        <div className="relative select-none">
+        <div className="relative select-none" ref={timeContainerRef}>
           <section
             onClick={() => {
               setSelectTime((prev) => !prev);
@@ -104,7 +131,7 @@ const Search: React.FC = () => {
             </section>
           )}
         </div>
-        <div className="relative select-none">
+        <div className="relative select-none" ref={stockContainerRef}>
           <section
             onClick={() => {
               setSelectStock((prev) => !prev);
