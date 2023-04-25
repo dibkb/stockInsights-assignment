@@ -22,11 +22,13 @@ const Search: React.FC = () => {
   const [timeOptionsSelected, setTimeOptionsSelected] = useState<timeOptions[]>(
     []
   );
-  const [timeOptions] = useState<timeOptions[]>(timeOptionsList);
+  const [timeOptions, setTimeOptions] =
+    useState<timeOptions[]>(timeOptionsList);
   const [stockOptionsSelected, setStockOptionsSelected] = useState<
     stockOptions[]
   >([]);
-  const [stockOptions] = useState<stockOptions[]>(stockOptionsList);
+  const [stockOptions, setStockOptions] =
+    useState<stockOptions[]>(stockOptionsList);
   // ==========================handle outside click=====================
   const handleClickOutsideStock = (event: MouseEvent): void => {
     if (
@@ -90,6 +92,14 @@ const Search: React.FC = () => {
     setStockOptionsSelected((prev) => prev.filter((item) => item !== element));
     element.selected = false;
   }, []);
+  const resetAll = () => {
+    timeOptions.forEach((item) => {
+      item.selected = false;
+    });
+    stockOptions.forEach((item) => {
+      item.selected = false;
+    });
+  };
   return (
     <div className="container mx-auto">
       <SearchBar />
@@ -178,6 +188,11 @@ const Search: React.FC = () => {
         stockSelected={stockOptionsSelected}
         removeTimeItemHandler={removeTimeItemHandler}
         removeStockItemHandler={removeStockItemHandler}
+        clearAll={() => {
+          setStockOptionsSelected([]);
+          setTimeOptionsSelected([]);
+          resetAll();
+        }}
       />
     </div>
   );

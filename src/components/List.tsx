@@ -7,7 +7,7 @@ const List: React.FC = () => {
       <p className="text-2xl font-bold my-9">Latest Concall Transcripts</p>
       <div className="flex flex-col gap-4">
         {Items.map((element) => (
-          <div>
+          <div key={element.id}>
             <span className="flex justify-between items-start">
               <h1 className="mb-4 font-medium text-sky-600 flex items-center gap-3 cursor-pointer hover:underline">
                 {element.title}

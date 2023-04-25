@@ -7,6 +7,7 @@ const FilteredItem: React.FC<FilteredItem> = ({
   stockSelected,
   removeTimeItemHandler,
   removeStockItemHandler,
+  clearAll,
 }) => {
   return (
     <div className="flex gap-3 mt-8 select-none flex-wrap items-center">
@@ -32,7 +33,10 @@ const FilteredItem: React.FC<FilteredItem> = ({
         </span>
       ))}
       {timeSelected.length || stockSelected.length ? (
-        <span className="text-sm font-medium px-4 py-2 rounded-full bg-red-500 text-white flex gap-1 items-center cursor-pointer hover:bg-red-700">
+        <span
+          className="text-sm font-medium px-4 py-2 rounded-full bg-red-500 text-white flex gap-1 items-center cursor-pointer hover:bg-red-700"
+          onClick={clearAll}
+        >
           <TrashIcon className="w-5 h-5" />
           <p className="whitespace-nowrap">Clear all</p>
         </span>
@@ -47,5 +51,6 @@ interface FilteredItem {
   stockSelected: stockOptions[];
   removeTimeItemHandler: (item: timeOptions) => void;
   removeStockItemHandler: (item: stockOptions) => void;
+  clearAll: () => void;
 }
 export default FilteredItem;
