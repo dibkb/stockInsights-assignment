@@ -3,7 +3,7 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import { Items } from "../data/ItemData";
 const List: React.FC = () => {
   return (
-    <div className="container mx-auto">
+    <div className="sm:container max-w-[90%] mx-auto">
       <p className="text-2xl font-bold my-9">Latest Concall Transcripts</p>
       <div className="flex flex-col gap-4">
         {Items.map((element) => (
