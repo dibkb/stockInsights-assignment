@@ -109,12 +109,15 @@ const Search: React.FC = () => {
           <p className="text-sm">Search within</p>
         </span>
         <div className="flex gap-3">
-          <div className="relative select-none" ref={timeContainerRef}>
+          <div
+            className="relative select-none flex-grow"
+            ref={timeContainerRef}
+          >
             <section
               onClick={() => {
                 setSelectTime((prev) => !prev);
               }}
-              className="flex items-center justify-between w-[180px] border border-stone-300 p-2 rounded-lg cursor-pointer bg-stone-200 text-sm font-medium "
+              className="flex items-center justify-between border sm:min-w-[190px] border-stone-300 p-2 rounded-lg cursor-pointer bg-stone-200 text-sm font-medium "
             >
               <p>Any time</p>
               {selectTime ? (
@@ -142,12 +145,15 @@ const Search: React.FC = () => {
               </section>
             )}
           </div>
-          <div className="relative select-none" ref={stockContainerRef}>
+          <div
+            className="relative select-none flex-grow"
+            ref={stockContainerRef}
+          >
             <section
               onClick={() => {
                 setSelectStock((prev) => !prev);
               }}
-              className="flex items-center justify-between w-[180px] border border-stone-300 p-2 rounded-lg cursor-pointer bg-stone-200 text-sm font-medium "
+              className="flex items-center justify-between border sm:min-w-[190px] border-stone-300 p-2 rounded-lg cursor-pointer bg-stone-200 text-sm font-medium "
             >
               <p>Any stock</p>
               {selectStock ? (
