@@ -27,7 +27,7 @@ const Announcement: React.FC = () => {
       </main>
       {/* Table */}
       <main className="flex flex-col gap-4 mt-9">
-        <div className="flex gap-4 items-start text-sm font-semibold uppercase border-b border-gray-300 pb-4">
+        <div className="flex gap-4 items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
           <h3 className="basis-[18.92%]">Company</h3>
           <h3 className="basis-[14.56%]">Announcement Type</h3>
           <h3 className="basis-[35.86%]">Announcement Summary</h3>
@@ -60,7 +60,7 @@ const Announcement: React.FC = () => {
               </div>
               <h3 className="basis-[9%]">{element.time}</h3>
               <div className="basis-[6.4%]">
-                <AiOutlineFilePdf />
+                <AiOutlineFilePdf size={20} />
               </div>
             </main>
           );
