@@ -1,5 +1,4 @@
 import {
-  ChevronDoubleDownIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   MagnifyingGlassIcon,
