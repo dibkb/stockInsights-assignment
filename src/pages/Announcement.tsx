@@ -1,5 +1,5 @@
 import React from "react";
-import { Filter, Searchbox } from "../components/Announcementcomp";
+import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
 const Announcement: React.FC = () => {
   return (
     <div>
@@ -13,6 +13,7 @@ const Announcement: React.FC = () => {
         </div>
         <Searchbox />
         <Filter />
+        <Datepicker />
       </main>
     </div>
   );
