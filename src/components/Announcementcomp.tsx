@@ -34,3 +34,27 @@ export const Datepicker: React.FC = () => {
     </div>
   );
 };
+
+export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
+  if (type === "Positive")
+    return (
+      <div className="bg-green-200 text-green-800 font-medium rounded-md p-1 px-2 w-min">
+        Positive
+      </div>
+    );
+  else if (type === "Neutral")
+    return (
+      <div className="bg-amber-200 text-amber-600 font-medium rounded-md p-1 px-2 w-min">
+        Neutral
+      </div>
+    );
+  else
+    return (
+      <div className="bg-red-200 text-red-600 font-medium rounded-md p-1 px-2 w-min">
+        Negative
+      </div>
+    );
+};
+interface Sentimentprop {
+  type: "Positive" | "Neutral" | "Negative";
+}
