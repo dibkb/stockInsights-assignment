@@ -1,4 +1,6 @@
 import {
+  ChevronDoubleDownIcon,
+  ChevronDownIcon,
   ChevronUpIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
@@ -40,12 +42,17 @@ const Filtermodal: React.FC = () => {
       {/* Company */}
       <main className="flex whitespace-nowrap gap-6 relative">
         <h3 className="font-medium">Company :</h3>
-        <h4
+        <span
           className="flex items-center gap-9 border-b pb-1 cursor-pointer"
           onClick={() => setShowCompanies((prev) => !prev)}
         >
-          All Companies <ChevronUpIcon className="w-4 h-4 text-gray-600" />
-        </h4>
+          <h3>All Companies</h3>
+          {showCompanies ? (
+            <ChevronDownIcon className="w-4 h-4 text-gray-600" />
+          ) : (
+            <ChevronUpIcon className="w-4 h-4 text-gray-600" />
+          )}
+        </span>
         {showCompanies && <CompanyModal />}
       </main>
       {/* Announcemnet */}
