@@ -14,19 +14,21 @@ export const Searchbox: React.FunctionComponent = () => {
 export const Filter: React.FC = () => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   return (
-    <div
-      onClick={() => setShowFilter((prev) => !prev)}
-      className="relative cursor-pointer border shadow-sm text-sm rounded-md py-2 px-4 flex gap-2 items-center"
-    >
-      <FunnelIcon className="h-5 w-5 text-gray-600" />
-      <h3 className="text-gray-800 font-medium">Filter</h3>
+    <div className="relative">
+      <div
+        onClick={() => setShowFilter((prev) => !prev)}
+        className="cursor-pointer select-none border shadow-sm text-sm rounded-md py-2 px-4 flex gap-2 items-center"
+      >
+        <FunnelIcon className="h-5 w-5 text-gray-600" />
+        <h3 className="text-gray-800 font-medium">Filter</h3>
+      </div>
       {showFilter && <Filtermodal />}
     </div>
   );
 };
 export const Datepicker: React.FC = () => {
   return (
-    <div className="cursor-pointer border shadow-sm text-sm rounded-md py-2 px-4 flex gap-2 items-center">
+    <div className="cursor-pointer select-none border shadow-sm text-sm rounded-md py-2 px-4 flex gap-2 items-center">
       <CalendarDaysIcon className="h-5 w-5 text-gray-600" />
       <h3 className="text-gray-800 font-medium">1 Aug 2020 - 7 Jul</h3>
     </div>
