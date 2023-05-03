@@ -4,16 +4,15 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import React, { useContext, useState } from "react";
-import { stockOptionsList } from "../data/data";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { AlertContext } from "../context/AlertContext";
+import useUniqueCompanies from "../hooks/useUniqueCompanies";
 const CompanyModal: React.FC = () => {
   const { alerts } = useContext(AlertContext);
-  const [companyOptions] = useState(alerts.map((item) => item.company));
-  console.log(companyOptions);
+  const companies = useUniqueCompanies(alerts);
   return (
-    <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col">
-      <div className="px-4 py-2 flex items-center gap-1">
+    <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
+      <div className="px-4 flex items-center gap-1">
         <MagnifyingGlassIcon className="h-4 w-4" />
         <input
           type="text"
@@ -21,18 +20,17 @@ const CompanyModal: React.FC = () => {
           className="max-w-[81%] grow p-1"
         />
       </div>
-      {stockOptionsList.map((element) => (
+      {companies.map(({ value, selected }) => (
         <div
-          key={element.id}
-          // onClick={() => selectStockItemHandler(element)}
-          className="cursor-pointer px-4 py-2 flex gap-2 hover:bg-stone-100"
+          key={value}
+          className="cursor-pointer px-4 py-2 flex items-center gap-2 hover:bg-stone-100"
         >
-          {element.selected ? (
+          {selected ? (
             <MdCheckBox className="text-blue-700" />
           ) : (
             <MdCheckBoxOutlineBlank />
           )}
-          <p className="text-xs font-medium">{element.value}</p>
+          <p className="text-sm font-medium">{value}</p>
         </div>
       ))}
     </section>

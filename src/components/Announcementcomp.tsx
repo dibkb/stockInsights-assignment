@@ -1,8 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CalendarDaysIcon, FunnelIcon } from "@heroicons/react/24/solid";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Filtermodal from "./Filtermodal";
-import { AlertContext } from "../context/AlertContext";
 export const Searchbox: React.FunctionComponent = () => {
   return (
     <div className="border shadow-md text-sm rounded-md py-2 px-4 flex gap-2 items-center">
