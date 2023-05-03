@@ -3,10 +3,14 @@ import {
   ChevronUpIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { stockOptionsList } from "../data/data";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
+import { AlertContext } from "../context/AlertContext";
 const CompanyModal: React.FC = () => {
+  const { alerts } = useContext(AlertContext);
+  const [companyOptions] = useState(alerts.map((item) => item.company));
+  console.log(companyOptions);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col">
       <div className="px-4 py-2 flex items-center gap-1">

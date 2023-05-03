@@ -14,8 +14,6 @@ export const Searchbox: React.FunctionComponent = () => {
 
 export const Filter: React.FC = () => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const { alerts } = useContext(AlertContext);
-  console.log(alerts);
   return (
     <div className="relative">
       <div

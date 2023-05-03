@@ -1,13 +1,7 @@
 import React from "react";
-import { AiOutlineFilePdf } from "react-icons/ai";
-import {
-  Datepicker,
-  Filter,
-  Searchbox,
-  Sentiment,
-} from "../components/Announcementcomp";
-import AlertProvider, { AlertContext } from "../context/AlertContext";
-import { announcements, typeAnnouncement } from "../data/announcement";
+import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
+import AlertProvider from "../context/AlertContext";
+import Allerts from "../components/Allerts";
 const Announcement: React.FC = () => {
   return (
     <AlertProvider>
@@ -36,36 +30,8 @@ const Announcement: React.FC = () => {
             <h3 className="basis-[9%]">Sentiment</h3>
             <h3 className="basis-[6.4%]">Source</h3>
           </div>
-          {announcements.map((element: typeAnnouncement) => {
-            return (
-              <main
-                key={element.id}
-                className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
-              >
-                <h3 className="font-medium text-base basis-[12.92%]">
-                  {element.company}
-                </h3>
-                <div className="basis-[14.56%]">
-                  <h3 className="bg-gray-200 rounded-md px-3 py-1 w-min">
-                    {element.type}
-                  </h3>
-                </div>
-                <div className="basis-[50.86%]">
-                  <h3 className="font-semibold">{element.summary.title}</h3>
-                  <h3 className="mt-1 whitespace-normal">
-                    {element.summary.content}
-                  </h3>
-                </div>
-                <div className="basis-[9%]">
-                  <Sentiment type={element.sentiment} />
-                </div>
-                <div className="basis-[6.4%] flex flex-col gap-2">
-                  <AiOutlineFilePdf size={20} className={""} />
-                  <h3 className="text-xs">{element.time}</h3>
-                </div>
-              </main>
-            );
-          })}
+          {/* Alerts */}
+          <Allerts />
         </main>
       </div>
     </AlertProvider>
