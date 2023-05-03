@@ -28,9 +28,9 @@ const Announcement: React.FC = () => {
       {/* Table */}
       <main className="flex flex-col gap-4 mt-9">
         <div className="flex gap-4 items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
-          <h3 className="basis-[18.92%]">Company</h3>
+          <h3 className="basis-[12.92%]">Company</h3>
           <h3 className="basis-[14.56%]">Announcement Type</h3>
-          <h3 className="basis-[35.86%]">Announcement Summary</h3>
+          <h3 className="basis-[41.86%]">Announcement Summary</h3>
           <h3 className="basis-[9%]">Sentiment</h3>
           <h3 className="basis-[9%]">Time</h3>
           <h3 className="basis-[6.4%]">Source</h3>
@@ -41,7 +41,7 @@ const Announcement: React.FC = () => {
               key={element.id}
               className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
             >
-              <h3 className="font-medium text-base basis-[18.92%]">
+              <h3 className="font-medium text-base basis-[12.92%]">
                 {element.company}
               </h3>
               <div className="basis-[14.56%]">
@@ -49,9 +49,9 @@ const Announcement: React.FC = () => {
                   {element.type}
                 </h3>
               </div>
-              <div className="basis-[35.86%]">
+              <div className="basis-[41.86%]">
                 <h3 className="font-semibold">{element.summary.title}</h3>
-                <h3 className="text-xs mt-1 whitespace-normal">
+                <h3 className="mt-1 whitespace-normal">
                   {element.summary.content}
                 </h3>
               </div>
