@@ -3,13 +3,51 @@ import {
   ChevronUpIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import React, { useContext, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { AlertContext } from "../context/AlertContext";
 import useUniqueCompanies from "../hooks/useUniqueCompanies";
-const CompanyModal: React.FC = () => {
+import { announcements } from "../data/announcement";
+const ComapanyName: React.FC<ComapanyName> = ({
+  value,
+  selected,
+  setFilteredCompanies,
+}) => {
+  const { alerts, setAlerts } = useContext(AlertContext);
+  const [companySelect, setComanySelect] = useState<boolean>(selected);
+  useEffect(() => {
+    if (companySelect) {
+      setFilteredCompanies((prev) => [...prev, value]);
+    } else {
+      setFilteredCompanies((prev) => prev.filter((item) => item !== value));
+    }
+  }, [companySelect, setFilteredCompanies, value]);
+  return (
+    <div
+      onClick={() => {
+        setComanySelect((prev) => !prev);
+      }}
+      className="cursor-pointer px-4 py-2 flex items-center gap-2 hover:bg-stone-100"
+    >
+      {companySelect ? (
+        <MdCheckBox className="text-blue-700" />
+      ) : (
+        <MdCheckBoxOutlineBlank />
+      )}
+      <p className="text-sm font-medium">{value}</p>
+    </div>
+  );
+};
+const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
   const { alerts } = useContext(AlertContext);
-  const companies = useUniqueCompanies(alerts);
+  const companies = useUniqueCompanies(announcements);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
       <div className="px-4 flex items-center gap-1">
@@ -21,23 +59,20 @@ const CompanyModal: React.FC = () => {
         />
       </div>
       {companies.map(({ value, selected }) => (
-        <div
+        <ComapanyName
+          value={value}
+          selected={selected}
           key={value}
-          className="cursor-pointer px-4 py-2 flex items-center gap-2 hover:bg-stone-100"
-        >
-          {selected ? (
-            <MdCheckBox className="text-blue-700" />
-          ) : (
-            <MdCheckBoxOutlineBlank />
-          )}
-          <p className="text-sm font-medium">{value}</p>
-        </div>
+          setFilteredCompanies={setFilteredCompanies}
+        />
       ))}
     </section>
   );
 };
 const Filtermodal: React.FC = () => {
   const [showCompanies, setShowCompanies] = useState<boolean>(false);
+  const [filteredCompanies, setFilteredCompanies] = useState<string[]>([]);
+  console.log(filteredCompanies);
   return (
     <div className="absolute w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
       {/* Company */}
@@ -54,7 +89,9 @@ const Filtermodal: React.FC = () => {
             <ChevronUpIcon className="w-4 h-4 text-gray-600" />
           )}
         </span>
-        {showCompanies && <CompanyModal />}
+        {showCompanies && (
+          <CompanyModal setFilteredCompanies={setFilteredCompanies} />
+        )}
       </main>
       {/* Announcemnet */}
       <main className="flex whitespace-nowrap gap-6 mt-3">
@@ -76,5 +113,12 @@ const Filtermodal: React.FC = () => {
     </div>
   );
 };
-
+type ComapanyName = {
+  value: string;
+  selected: boolean;
+  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+};
+type CompanyModal = {
+  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+};
 export default Filtermodal;
