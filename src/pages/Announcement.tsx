@@ -27,12 +27,11 @@ const Announcement: React.FC = () => {
       </main>
       {/* Table */}
       <main className="flex flex-col gap-4 mt-9">
-        <div className="flex gap-4 items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
+        <div className="flex justify-between items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
           <h3 className="basis-[12.92%]">Company</h3>
           <h3 className="basis-[14.56%]">Announcement Type</h3>
-          <h3 className="basis-[41.86%]">Announcement Summary</h3>
+          <h3 className="basis-[50.86%]">Announcement Summary</h3>
           <h3 className="basis-[9%]">Sentiment</h3>
-          <h3 className="basis-[9%]">Time</h3>
           <h3 className="basis-[6.4%]">Source</h3>
         </div>
         {announcements.map((element: typeAnnouncement) => {
@@ -49,7 +48,7 @@ const Announcement: React.FC = () => {
                   {element.type}
                 </h3>
               </div>
-              <div className="basis-[41.86%]">
+              <div className="basis-[50.86%]">
                 <h3 className="font-semibold">{element.summary.title}</h3>
                 <h3 className="mt-1 whitespace-normal">
                   {element.summary.content}
@@ -58,9 +57,9 @@ const Announcement: React.FC = () => {
               <div className="basis-[9%]">
                 <Sentiment type={element.sentiment} />
               </div>
-              <h3 className="basis-[9%]">{element.time}</h3>
-              <div className="basis-[6.4%]">
-                <AiOutlineFilePdf size={20} />
+              <div className="basis-[6.4%] flex flex-col items-center gap-2">
+                <AiOutlineFilePdf size={20} className={""} />
+                <h3 className="text-xs">{element.time}</h3>
               </div>
             </main>
           );
