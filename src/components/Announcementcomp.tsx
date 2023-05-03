@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CalendarDaysIcon, FunnelIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import Filtermodal from "./Filtermodal";
+import { typeAnnouncement } from "../data/announcement";
 export const Searchbox: React.FunctionComponent = () => {
   return (
     <div className="border shadow-md text-sm rounded-md py-2 px-4 flex gap-2 items-center">
@@ -11,7 +12,7 @@ export const Searchbox: React.FunctionComponent = () => {
   );
 };
 
-export const Filter: React.FC = () => {
+export const Filter: React.FC<Filterprop> = ({ alert }) => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   return (
     <div className="relative">
@@ -57,4 +58,7 @@ export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
 };
 interface Sentimentprop {
   type: "Positive" | "Neutral" | "Negative";
+}
+interface Filterprop {
+  alert: typeAnnouncement[];
 }

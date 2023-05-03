@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { AiOutlineFilePdf } from "react-icons/ai";
 import {
   Datepicker,
@@ -20,7 +20,7 @@ const Announcement: React.FC = () => {
         </div>
         <main className="flex items-end gap-4">
           <Searchbox />
-          <Filter />
+          <Filter alerts={alerts} />
           <Datepicker />
         </main>
         <h3 className="text-sm">Last Updated: 7 Jul, 14:04</h3>
@@ -34,7 +34,7 @@ const Announcement: React.FC = () => {
           <h3 className="basis-[9%]">Sentiment</h3>
           <h3 className="basis-[6.4%]">Source</h3>
         </div>
-        {announcements.map((element: typeAnnouncement) => {
+        {alerts.map((element: typeAnnouncement) => {
           return (
             <main
               key={element.id}
@@ -57,7 +57,7 @@ const Announcement: React.FC = () => {
               <div className="basis-[9%]">
                 <Sentiment type={element.sentiment} />
               </div>
-              <div className="basis-[6.4%] flex flex-col items-center gap-2">
+              <div className="basis-[6.4%] flex flex-col gap-2">
                 <AiOutlineFilePdf size={20} className={""} />
                 <h3 className="text-xs">{element.time}</h3>
               </div>
@@ -68,5 +68,12 @@ const Announcement: React.FC = () => {
     </div>
   );
 };
-
+function reducer(state: typeAnnouncement[], action: Action) {
+  console.log(state);
+  console.log(action.type);
+  return state;
+}
+type Action = {
+  type: string;
+};
 export default Announcement;

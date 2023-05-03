@@ -1,7 +1,7 @@
 export const announcements: typeAnnouncement[] = [
   {
     id: "1",
-    company: "Carysil Limited",
+    company: "Cnires Limited",
     type: "Major Contract Awards",
     summary: {
       title: "Contract Renewal",
@@ -25,7 +25,7 @@ export const announcements: typeAnnouncement[] = [
   },
   {
     id: "2a",
-    company: "Carysil Limited",
+    company: "Gemsi",
     type: "Major Contract Awards",
     summary: {
       title: "Contract Renewal",
@@ -47,7 +47,20 @@ export const announcements: typeAnnouncement[] = [
     sentiment: "Negative",
     time: "7 Jul 14:04",
   },
+  {
+    id: "3a",
+    company: "Gravita Limited",
+    type: "Distribute Dividents",
+    summary: {
+      title: "Dividents",
+      content:
+        "Carysil renews contract with KARRAN INC. USA for supply of Quartz Kitchen sinks worth USD 68 million over 5 years",
+    },
+    sentiment: "Positive",
+    time: "7 Jul 14:04",
+  },
 ];
+
 export type typeAnnouncement = {
   id: string;
   company: string;
