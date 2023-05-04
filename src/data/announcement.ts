@@ -61,14 +61,29 @@ export const announcements: typeAnnouncement[] = [
   },
 ];
 
+// export type typeAnnouncement = {
+//   id: string;
+//   company: string;
+//   type: string;
+//   sentiment: "Positive" | "Neutral" | "Negative";
+//   summary: {
+//     title: string;
+//     content: string;
+//   };
+//   time: string;
+// };
 export type typeAnnouncement = {
-  id: string;
-  company: string;
+  company_name: string;
+  exchange: string;
+  company_id: string;
   type: string;
-  sentiment: "Positive" | "Neutral" | "Negative";
-  summary: {
-    title: string;
-    content: string;
-  };
-  time: string;
+  type_id: string;
+  sub_type: string;
+  summary: string;
+  sentiment: "neutral" | "positive" | "negative";
+  published_time: string;
+  created_at: string;
+  created_by: string;
+  source_url: string;
+  significance: boolean;
 };

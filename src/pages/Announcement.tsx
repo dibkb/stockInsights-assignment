@@ -34,8 +34,8 @@ const Announcement: React.FC = () => {
         <main className="flex flex-col gap-4 mt-9">
           <div className="flex justify-between items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
             <h3 className="basis-[12.92%]">Company</h3>
-            <h3 className="basis-[14.56%]">Announcement Type</h3>
-            <h3 className="basis-[50.86%]">Announcement Summary</h3>
+            <h3 className="basis-[17.56%]">Announcement Type</h3>
+            <h3 className="basis-[47.86%]">Announcement Summary</h3>
             <h3 className="basis-[9%]">Sentiment</h3>
             <h3 className="basis-[6.4%]">Source</h3>
           </div>

@@ -46,13 +46,13 @@ export const Datepicker: React.FC = () => {
 };
 
 export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
-  if (type === "Positive")
+  if (type === "positive")
     return (
       <div className="bg-positiveBg text-green-800 font-medium rounded-md p-1 px-2 w-min">
         Positive
       </div>
     );
-  else if (type === "Neutral")
+  else if (type === "neutral")
     return (
       <div className="bg-neutralBg text-amber-600 font-medium rounded-md p-1 px-2 w-min">
         Neutral
@@ -66,7 +66,7 @@ export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
     );
 };
 interface Sentimentprop {
-  type: "Positive" | "Neutral" | "Negative";
+  type: "positive" | "neutral" | "negative";
 }
 interface Filter {
   setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
