@@ -48,7 +48,7 @@ const RenderName: React.FC<RenderName> = ({
 };
 const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
   const { alerts } = useContext(AlertContext);
-  const companies = useUniqueCompanies(announcements);
+  const companies = useUniqueCompanies(alerts);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
       <div className="px-4 flex items-center gap-1">
@@ -73,7 +73,8 @@ const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
 const AnnouncementModal: React.FC<AnnouncementModal> = ({
   setFilteredAnnouncements,
 }) => {
-  const types = useUniqueAnnouncement(announcements);
+  const { alerts } = useContext(AlertContext);
+  const types = useUniqueAnnouncement(alerts);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
       <div className="px-4 flex items-center gap-1">
@@ -98,7 +99,8 @@ const AnnouncementModal: React.FC<AnnouncementModal> = ({
 const SentimentModal: React.FC<SentimentModal> = ({
   setFilteredSentiments,
 }) => {
-  const types = useUniqueSentiment(announcements);
+  const { alerts } = useContext(AlertContext);
+  const types = useUniqueSentiment(alerts);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
       <div className="px-4 flex items-center gap-1">

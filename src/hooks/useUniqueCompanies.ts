@@ -3,7 +3,7 @@ const useUniqueCompanies = (alerts: typeAnnouncement[]): returnType => {
   const companyUnique = [
     ...new Set(
       alerts.map((item: typeAnnouncement) => {
-        return item.company;
+        return item.company_name;
       })
     ),
   ];
