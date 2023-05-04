@@ -6,7 +6,6 @@ import {
 import React, {
   Dispatch,
   SetStateAction,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -15,20 +14,21 @@ import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { AlertContext } from "../context/AlertContext";
 import useUniqueCompanies from "../hooks/useUniqueCompanies";
 import { announcements } from "../data/announcement";
-const ComapanyName: React.FC<ComapanyName> = ({
+import useUniqueAnnouncement from "../hooks/useUniqueAnnouncement";
+const RenderName: React.FC<RenderName> = ({
   value,
   selected,
-  setFilteredCompanies,
+  setFilteredList,
 }) => {
-  const { alerts, setAlerts } = useContext(AlertContext);
-  const [companySelect, setComanySelect] = useState<boolean>(selected);
+  // const { alerts, setAlerts } = useContext(AlertContext);
+  const [nameSelect, setComanySelect] = useState<boolean>(selected);
   useEffect(() => {
-    if (companySelect) {
-      setFilteredCompanies((prev) => [...prev, value]);
+    if (nameSelect) {
+      setFilteredList((prev) => [...prev, value]);
     } else {
-      setFilteredCompanies((prev) => prev.filter((item) => item !== value));
+      setFilteredList((prev) => prev.filter((item) => item !== value));
     }
-  }, [companySelect, setFilteredCompanies, value]);
+  }, [nameSelect, setFilteredList, value]);
   return (
     <div
       onClick={() => {
@@ -36,7 +36,7 @@ const ComapanyName: React.FC<ComapanyName> = ({
       }}
       className="cursor-pointer px-4 py-2 flex items-center gap-2 hover:bg-stone-100"
     >
-      {companySelect ? (
+      {nameSelect ? (
         <MdCheckBox className="text-blue-700" />
       ) : (
         <MdCheckBoxOutlineBlank />
@@ -59,20 +59,50 @@ const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
         />
       </div>
       {companies.map(({ value, selected }) => (
-        <ComapanyName
+        <RenderName
           value={value}
           selected={selected}
           key={value}
-          setFilteredCompanies={setFilteredCompanies}
+          setFilteredList={setFilteredCompanies}
+        />
+      ))}
+    </section>
+  );
+};
+const AnnouncementModal: React.FC<AnnouncementModal> = ({
+  setFilteredAnnouncements,
+}) => {
+  const types = useUniqueAnnouncement(announcements);
+  return (
+    <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
+      <div className="px-4 flex items-center gap-1">
+        <MagnifyingGlassIcon className="h-4 w-4" />
+        <input
+          type="text"
+          placeholder="Search"
+          className="max-w-[81%] grow p-1"
+        />
+      </div>
+      {types.map(({ value, selected }) => (
+        <RenderName
+          value={value}
+          selected={selected}
+          key={value}
+          setFilteredList={setFilteredAnnouncements}
         />
       ))}
     </section>
   );
 };
 const Filtermodal: React.FC = () => {
+  const { alerts, setAlerts } = useContext(AlertContext);
   const [showCompanies, setShowCompanies] = useState<boolean>(false);
+  const [showAnnouncements, setShowAnnouncements] = useState<boolean>(false);
+  const [showSentiments, setShowSentiments] = useState<boolean>(false);
   const [filteredCompanies, setFilteredCompanies] = useState<string[]>([]);
-  console.log(filteredCompanies);
+  const [filteredAnnouncements, setFilteredAnnouncements] = useState<string[]>(
+    []
+  );
   return (
     <div className="absolute w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
       {/* Company */}
@@ -94,18 +124,39 @@ const Filtermodal: React.FC = () => {
         )}
       </main>
       {/* Announcemnet */}
-      <main className="flex whitespace-nowrap gap-6 mt-3">
+      <main className="flex whitespace-nowrap gap-6 mt-3 relative">
         <h3 className="font-medium">Announcemnet :</h3>
-        <h4 className="flex items-center gap-9 border-b pb-1 cursor-pointer">
-          All Announcemnets <ChevronUpIcon className="w-4 h-4 text-gray-600" />
-        </h4>
+        <span
+          className="flex items-center gap-9 border-b pb-1 cursor-pointer"
+          onClick={() => setShowAnnouncements((prev) => !prev)}
+        >
+          <h3>All Announcements</h3>
+          {showAnnouncements ? (
+            <ChevronDownIcon className="w-4 h-4 text-gray-600" />
+          ) : (
+            <ChevronUpIcon className="w-4 h-4 text-gray-600" />
+          )}
+        </span>
+        {showAnnouncements && (
+          <AnnouncementModal
+            setFilteredAnnouncements={setFilteredAnnouncements}
+          />
+        )}
       </main>
       {/* Sentiment */}
       <main className="flex whitespace-nowrap gap-6 mt-3">
         <h3 className="font-medium">Sentiment :</h3>
-        <h4 className="flex items-center gap-9 border-b pb-1 cursor-pointer">
-          All Sentiments <ChevronUpIcon className="w-4 h-4 text-gray-600" />
-        </h4>
+        <span
+          className="flex items-center gap-9 border-b pb-1 cursor-pointer"
+          onClick={() => setShowSentiments((prev) => !prev)}
+        >
+          <h3>All Sentiments</h3>
+          {showSentiments ? (
+            <ChevronDownIcon className="w-4 h-4 text-gray-600" />
+          ) : (
+            <ChevronUpIcon className="w-4 h-4 text-gray-600" />
+          )}
+        </span>
       </main>
       <button className="bg-indigo-600 rounded-md text-white py-2 px-4 mt-4 flex hover:bg-indigo-700">
         Apply Filter
@@ -113,12 +164,15 @@ const Filtermodal: React.FC = () => {
     </div>
   );
 };
-type ComapanyName = {
+type RenderName = {
   value: string;
   selected: boolean;
-  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+  setFilteredList: Dispatch<SetStateAction<string[]>>;
 };
 type CompanyModal = {
   setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+};
+type AnnouncementModal = {
+  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
 };
 export default Filtermodal;
