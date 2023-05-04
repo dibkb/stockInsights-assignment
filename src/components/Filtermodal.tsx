@@ -15,6 +15,7 @@ import { AlertContext } from "../context/AlertContext";
 import useUniqueCompanies from "../hooks/useUniqueCompanies";
 import { announcements } from "../data/announcement";
 import useUniqueAnnouncement from "../hooks/useUniqueAnnouncement";
+import useUniqueSentiment from "../hooks/useuseUniqueSentiments";
 const RenderName: React.FC<RenderName> = ({
   value,
   selected,
@@ -94,8 +95,33 @@ const AnnouncementModal: React.FC<AnnouncementModal> = ({
     </section>
   );
 };
+const SentimentModal: React.FC<SentimentModal> = ({
+  setFilteredSentiments,
+}) => {
+  const types = useUniqueSentiment(announcements);
+  return (
+    <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
+      <div className="px-4 flex items-center gap-1">
+        <MagnifyingGlassIcon className="h-4 w-4" />
+        <input
+          type="text"
+          placeholder="Search"
+          className="max-w-[81%] grow p-1"
+        />
+      </div>
+      {types.map(({ value, selected }) => (
+        <RenderName
+          value={value}
+          selected={selected}
+          key={value}
+          setFilteredList={setFilteredSentiments}
+        />
+      ))}
+    </section>
+  );
+};
 const Filtermodal: React.FC = () => {
-  const { alerts, setAlerts } = useContext(AlertContext);
+  // const { alerts, setAlerts } = useContext(AlertContext);
   const [showCompanies, setShowCompanies] = useState<boolean>(false);
   const [showAnnouncements, setShowAnnouncements] = useState<boolean>(false);
   const [showSentiments, setShowSentiments] = useState<boolean>(false);
@@ -103,6 +129,7 @@ const Filtermodal: React.FC = () => {
   const [filteredAnnouncements, setFilteredAnnouncements] = useState<string[]>(
     []
   );
+  const [filteredSentiments, setFilteredSentiments] = useState<string[]>([]);
   return (
     <div className="absolute w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
       {/* Company */}
@@ -110,7 +137,11 @@ const Filtermodal: React.FC = () => {
         <h3 className="font-medium">Company :</h3>
         <span
           className="flex items-center gap-9 border-b pb-1 cursor-pointer"
-          onClick={() => setShowCompanies((prev) => !prev)}
+          onClick={() => {
+            setShowCompanies((prev) => !prev);
+            setShowAnnouncements(false);
+            setShowSentiments(false);
+          }}
         >
           <h3>All Companies</h3>
           {showCompanies ? (
@@ -128,7 +159,11 @@ const Filtermodal: React.FC = () => {
         <h3 className="font-medium">Announcemnet :</h3>
         <span
           className="flex items-center gap-9 border-b pb-1 cursor-pointer"
-          onClick={() => setShowAnnouncements((prev) => !prev)}
+          onClick={() => {
+            setShowAnnouncements((prev) => !prev);
+            setShowCompanies(false);
+            setShowSentiments(false);
+          }}
         >
           <h3>All Announcements</h3>
           {showAnnouncements ? (
@@ -144,11 +179,15 @@ const Filtermodal: React.FC = () => {
         )}
       </main>
       {/* Sentiment */}
-      <main className="flex whitespace-nowrap gap-6 mt-3">
+      <main className="flex whitespace-nowrap gap-6 mt-3 relative">
         <h3 className="font-medium">Sentiment :</h3>
         <span
           className="flex items-center gap-9 border-b pb-1 cursor-pointer"
-          onClick={() => setShowSentiments((prev) => !prev)}
+          onClick={() => {
+            setShowSentiments((prev) => !prev);
+            setShowCompanies(false);
+            setShowAnnouncements(false);
+          }}
         >
           <h3>All Sentiments</h3>
           {showSentiments ? (
@@ -157,6 +196,9 @@ const Filtermodal: React.FC = () => {
             <ChevronUpIcon className="w-4 h-4 text-gray-600" />
           )}
         </span>
+        {showSentiments && (
+          <SentimentModal setFilteredSentiments={setFilteredSentiments} />
+        )}
       </main>
       <button className="bg-indigo-600 rounded-md text-white py-2 px-4 mt-4 flex hover:bg-indigo-700">
         Apply Filter
@@ -174,5 +216,8 @@ type CompanyModal = {
 };
 type AnnouncementModal = {
   setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
+};
+type SentimentModal = {
+  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
 };
 export default Filtermodal;
