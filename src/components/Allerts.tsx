@@ -5,6 +5,18 @@ import { Sentiment } from "./Announcementcomp";
 import { AiOutlineFilePdf } from "react-icons/ai";
 const Allerts: React.FC = () => {
   const { alerts } = useContext(AlertContext);
+  const formatDate = (date: string): string => {
+    const newDate = new Date(String(date));
+    const options = {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    const dateString = newDate.toLocaleDateString("en-US", options);
+    return dateString;
+  };
+
   return (
     <>
       {alerts.map((element: typeAnnouncement) => {
@@ -29,8 +41,10 @@ const Allerts: React.FC = () => {
               <Sentiment type={element.sentiment} />
             </div>
             <div className="basis-[6.4%] flex flex-col gap-2">
-              <AiOutlineFilePdf size={20} className={""} />
-              {/* <h3 className="text-xs">{element.created_at}</h3> */}
+              <a href={element.source_url}>
+                <AiOutlineFilePdf size={20} className={""} />
+              </a>
+              <h3 className="text-xs">{formatDate(element.created_at)}</h3>
             </div>
           </main>
         );
