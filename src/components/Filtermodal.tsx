@@ -120,16 +120,18 @@ const SentimentModal: React.FC<SentimentModal> = ({
     </section>
   );
 };
-const Filtermodal: React.FC = () => {
+
+// ----------------------Filter Modal-------------------------------------------
+
+const Filtermodal: React.FC<FilterModal> = ({
+  setFilteredSentiments,
+  setFilteredAnnouncements,
+  setFilteredCompanies,
+}) => {
   // const { alerts, setAlerts } = useContext(AlertContext);
   const [showCompanies, setShowCompanies] = useState<boolean>(false);
   const [showAnnouncements, setShowAnnouncements] = useState<boolean>(false);
   const [showSentiments, setShowSentiments] = useState<boolean>(false);
-  const [filteredCompanies, setFilteredCompanies] = useState<string[]>([]);
-  const [filteredAnnouncements, setFilteredAnnouncements] = useState<string[]>(
-    []
-  );
-  const [filteredSentiments, setFilteredSentiments] = useState<string[]>([]);
   return (
     <div className="absolute w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
       {/* Company */}
@@ -210,6 +212,11 @@ type RenderName = {
   value: string;
   selected: boolean;
   setFilteredList: Dispatch<SetStateAction<string[]>>;
+};
+type FilterModal = {
+  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
+  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
 };
 type CompanyModal = {
   setFilteredCompanies: Dispatch<SetStateAction<string[]>>;

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
 import AlertProvider from "../context/AlertContext";
 import Allerts from "../components/Allerts";
 const Announcement: React.FC = () => {
+  const [filteredCompanies, setFilteredCompanies] = useState<string[]>([]);
+  const [filteredAnnouncements, setFilteredAnnouncements] = useState<string[]>(
+    []
+  );
+  const [filteredSentiments, setFilteredSentiments] = useState<string[]>([]);
   return (
     <AlertProvider>
       <div>
@@ -16,7 +21,11 @@ const Announcement: React.FC = () => {
           </div>
           <main className="flex items-end gap-4">
             <Searchbox />
-            <Filter />
+            <Filter
+              setFilteredCompanies={setFilteredCompanies}
+              setFilteredAnnouncements={setFilteredAnnouncements}
+              setFilteredSentiments={setFilteredSentiments}
+            />
             <Datepicker />
           </main>
           <h3 className="text-sm">Last Updated: 7 Jul, 14:04</h3>

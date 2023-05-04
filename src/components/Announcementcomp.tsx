@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CalendarDaysIcon, FunnelIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Filtermodal from "./Filtermodal";
 export const Searchbox: React.FunctionComponent = () => {
   return (
@@ -11,7 +11,11 @@ export const Searchbox: React.FunctionComponent = () => {
   );
 };
 
-export const Filter: React.FC = () => {
+export const Filter: React.FC<Filter> = ({
+  setFilteredSentiments,
+  setFilteredCompanies,
+  setFilteredAnnouncements,
+}) => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   return (
     <div className="relative">
@@ -22,7 +26,13 @@ export const Filter: React.FC = () => {
         <FunnelIcon className="h-5 w-5 text-gray-600" />
         <h3 className="text-gray-800 font-medium">Filter</h3>
       </div>
-      {showFilter && <Filtermodal />}
+      {showFilter && (
+        <Filtermodal
+          setFilteredSentiments={setFilteredSentiments}
+          setFilteredCompanies={setFilteredCompanies}
+          setFilteredAnnouncements={setFilteredAnnouncements}
+        />
+      )}
     </div>
   );
 };
@@ -57,4 +67,9 @@ export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
 };
 interface Sentimentprop {
   type: "Positive" | "Neutral" | "Negative";
+}
+interface Filter {
+  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
+  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
 }
