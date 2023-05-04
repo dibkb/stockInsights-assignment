@@ -48,22 +48,27 @@ const RenderName: React.FC<RenderName> = ({
 };
 const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
   const { alerts } = useContext(AlertContext);
-  const companies = useUniqueCompanies(alerts);
+  const [companySearch, setCompanySearch] = useState<string>("");
+  const companies = useUniqueCompanies(companySearch);
   return (
     <section className="absolute top-[100%] left-[20%] z-10 bg-white border w-min rounded-lg shadow-md flex flex-col py-4">
       <div className="px-4 flex items-center gap-1">
         <MagnifyingGlassIcon className="h-4 w-4" />
         <input
           type="text"
+          value={companySearch}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setCompanySearch(e.target.value)
+          }
           placeholder="Search"
           className="max-w-[81%] grow p-1"
         />
       </div>
-      {companies.map(({ value, selected }) => (
+      {companies.map(({ company_name, selected }) => (
         <RenderName
-          value={value}
+          value={company_name}
           selected={selected}
-          key={value}
+          key={company_name}
           setFilteredList={setFilteredCompanies}
         />
       ))}

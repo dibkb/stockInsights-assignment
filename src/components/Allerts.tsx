@@ -17,10 +17,10 @@ const Allerts: React.FC = () => {
   };
   return (
     <>
-      {alerts.map((element: typeAnnouncement) => {
+      {alerts.map((element: typeAnnouncement, id) => {
         return (
           <main
-            key={element.company_id + element.published_time}
+            key={JSON.stringify(element.summary + id)}
             className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
           >
             <h3 className="font-medium text-base basis-[12.92%]">
