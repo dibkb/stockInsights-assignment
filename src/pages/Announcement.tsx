@@ -11,7 +11,7 @@ const Announcement: React.FC = () => {
   >([]);
   const [filteredSentiments, setFilteredSentiments] = useState<selected[]>([]);
   const [applyFilter, setApplyFilter] = useState<boolean>(false);
-  const [filterApplied, setFilterApplied] = useState<boolean>(false);
+  // const [filterApplied, setFilterApplied] = useState<boolean>(false);
   const applyFilters = useCallback(() => {
     let filterCompanyIdsString = "";
     let filterTypeIdsString = "";
@@ -54,6 +54,14 @@ const Announcement: React.FC = () => {
         </main>
         <h3 className="text-sm">Last Updated: 7 Jul, 14:04</h3>
       </main>
+      {/* Filter Options */}
+      {applyFilter && (
+        <main className="mt-5 text-sm">
+          <h3>
+            {filteredCompanies[0].name}+{filteredCompanies.length - 1}
+          </h3>
+        </main>
+      )}
       {/* Table */}
       <main className="flex flex-col gap-4 mt-9">
         <div className="flex justify-between items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">

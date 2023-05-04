@@ -17,36 +17,37 @@ const Allerts: React.FC = () => {
   };
   return (
     <>
-      {alerts.map((element: typeAnnouncement, id) => {
-        return (
-          <main
-            key={JSON.stringify(element.summary + id)}
-            className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
-          >
-            <h3 className="font-medium text-base basis-[12.92%]">
-              {element.company_name}
-            </h3>
-            <div className="basis-[17.56%]">
-              <h3 className="bg-gray-200 rounded-md px-3 py-1 w-min">
-                {element.type}
+      {alerts &&
+        alerts.map((element: typeAnnouncement, id) => {
+          return (
+            <main
+              key={JSON.stringify(element.summary + id)}
+              className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
+            >
+              <h3 className="font-medium text-base basis-[12.92%]">
+                {element.company_name}
               </h3>
-            </div>
-            <div className="basis-[47.86%]">
-              <h3 className="font-semibold">{element.sub_type}</h3>
-              <h3 className="mt-1 whitespace-normal">{element.summary}</h3>
-            </div>
-            <div className="basis-[9%]">
-              <Sentiment type={element.sentiment} />
-            </div>
-            <div className="basis-[6.4%] flex flex-col gap-2">
-              <a href={element.source_url}>
-                <AiOutlineFilePdf size={20} className={""} />
-              </a>
-              <h3 className="text-xs">{formatDate(element.created_at)}</h3>
-            </div>
-          </main>
-        );
-      })}
+              <div className="basis-[17.56%]">
+                <h3 className="bg-gray-200 rounded-md px-3 py-1 w-min">
+                  {element.type}
+                </h3>
+              </div>
+              <div className="basis-[47.86%]">
+                <h3 className="font-semibold">{element.sub_type}</h3>
+                <h3 className="mt-1 whitespace-normal">{element.summary}</h3>
+              </div>
+              <div className="basis-[9%]">
+                <Sentiment type={element.sentiment} />
+              </div>
+              <div className="basis-[6.4%] flex flex-col gap-2">
+                <a href={element.source_url}>
+                  <AiOutlineFilePdf size={20} className={""} />
+                </a>
+                <h3 className="text-xs">{formatDate(element.created_at)}</h3>
+              </div>
+            </main>
+          );
+        })}
     </>
   );
 };
