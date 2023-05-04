@@ -3,18 +3,22 @@ const useUniqueAnnouncement = (alerts: typeAnnouncement[]): returnType => {
   const companyUnique = [
     ...new Set(
       alerts.map((item: typeAnnouncement) => {
-        return item.type;
+        return {
+          type: item.type,
+          type_id: item.type_id,
+        };
       })
     ),
   ];
   const modifiedUnique = companyUnique.map((str) => ({
-    value: str,
+    ...str,
     selected: false,
   }));
   return modifiedUnique;
 };
 type returnType = {
-  value: string;
+  type: string;
+  type_id: string;
   selected: boolean;
 }[];
 export default useUniqueAnnouncement;

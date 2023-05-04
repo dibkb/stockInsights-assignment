@@ -13,11 +13,11 @@ import React, {
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { AlertContext } from "../context/AlertContext";
 import useUniqueCompanies from "../hooks/useUniqueCompanies";
-import { announcements } from "../data/announcement";
 import useUniqueAnnouncement from "../hooks/useUniqueAnnouncement";
 import useUniqueSentiment from "../hooks/useuseUniqueSentiments";
 const RenderName: React.FC<RenderName> = ({
   value,
+  id,
   selected,
   setFilteredList,
 }) => {
@@ -47,7 +47,6 @@ const RenderName: React.FC<RenderName> = ({
   );
 };
 const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
-  const { alerts } = useContext(AlertContext);
   const [companySearch, setCompanySearch] = useState<string>("");
   const companies = useUniqueCompanies(companySearch);
   return (
@@ -64,11 +63,12 @@ const CompanyModal: React.FC<CompanyModal> = ({ setFilteredCompanies }) => {
           className="max-w-[81%] grow p-1"
         />
       </div>
-      {companies.map(({ company_name, selected }) => (
+      {companies.map(({ company_name, company_id, selected }) => (
         <RenderName
           value={company_name}
           selected={selected}
           key={company_name}
+          id={company_id}
           setFilteredList={setFilteredCompanies}
         />
       ))}
@@ -90,11 +90,12 @@ const AnnouncementModal: React.FC<AnnouncementModal> = ({
           className="max-w-[81%] grow p-1"
         />
       </div>
-      {types.map(({ value, selected }) => (
+      {types.map(({ type, type_id, selected }) => (
         <RenderName
-          value={value}
+          value={type}
           selected={selected}
-          key={value}
+          key={type}
+          id={type_id}
           setFilteredList={setFilteredAnnouncements}
         />
       ))}
@@ -217,6 +218,7 @@ const Filtermodal: React.FC<FilterModal> = ({
 };
 type RenderName = {
   value: string;
+  id?: string;
   selected: boolean;
   setFilteredList: Dispatch<SetStateAction<string[]>>;
 };
