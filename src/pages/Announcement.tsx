@@ -30,8 +30,8 @@ const Announcement: React.FC = () => {
       `https://9a84ce1e-ff82-4b80-b2db-035d0769c3c2.mock.pstmn.io/api/annoucements?ex=BSE&cid=${filterCompanyIdsString}&type=${filterTypeIdsString}&s=${filterSentimentsString}&from=2023-05-01&to=2023-05-01&page=1&o=20`
     )
       .then((res) => res.json())
-      .then((json) => console.log(json));
-  }, [filteredCompanies, filteredAnnouncements, filteredSentiments]);
+      .then((json) => setAlerts(json.announcements.slice(1, 3)));
+  }, [filteredCompanies, filteredAnnouncements, filteredSentiments, setAlerts]);
   return (
     <div>
       <h3 className="text-sm font-medium underline underline-offset-4 text-indigo-600 mt-4">
