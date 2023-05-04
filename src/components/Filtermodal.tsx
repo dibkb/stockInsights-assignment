@@ -135,6 +135,7 @@ const Filtermodal: React.FC<FilterModal> = ({
   setFilteredSentiments,
   setFilteredAnnouncements,
   setFilteredCompanies,
+  applyFilters,
 }) => {
   // const { alerts, setAlerts } = useContext(AlertContext);
   const [showCompanies, setShowCompanies] = useState<boolean>(false);
@@ -210,7 +211,10 @@ const Filtermodal: React.FC<FilterModal> = ({
           <SentimentModal setFilteredSentiments={setFilteredSentiments} />
         )}
       </main>
-      <button className="bg-indigo-600 rounded-md text-white py-2 px-4 mt-4 flex hover:bg-indigo-700">
+      <button
+        onClick={applyFilters}
+        className="bg-indigo-600 rounded-md text-white py-2 px-4 mt-4 flex hover:bg-indigo-700"
+      >
         Apply Filter
       </button>
     </div>
@@ -230,6 +234,7 @@ type FilterModal = {
   setFilteredSentiments: Dispatch<SetStateAction<selected[]>>;
   setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;
   setFilteredAnnouncements: Dispatch<SetStateAction<selected[]>>;
+  applyFilters: () => void;
 };
 type CompanyModal = {
   setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;

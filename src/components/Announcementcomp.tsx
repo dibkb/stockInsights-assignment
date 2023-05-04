@@ -15,6 +15,7 @@ export const Filter: React.FC<Filter> = ({
   setFilteredSentiments,
   setFilteredCompanies,
   setFilteredAnnouncements,
+  applyFilters,
 }) => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   return (
@@ -31,6 +32,7 @@ export const Filter: React.FC<Filter> = ({
           setFilteredSentiments={setFilteredSentiments}
           setFilteredCompanies={setFilteredCompanies}
           setFilteredAnnouncements={setFilteredAnnouncements}
+          applyFilters={applyFilters}
         />
       )}
     </div>
@@ -76,4 +78,5 @@ interface Filter {
   setFilteredSentiments: Dispatch<SetStateAction<selected[]>>;
   setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;
   setFilteredAnnouncements: Dispatch<SetStateAction<selected[]>>;
+  applyFilters: () => void;
 }
