@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { AlertContext } from "../context/AlertContext";
 import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
 import AlertProvider from "../context/AlertContext";
@@ -13,11 +13,25 @@ const Announcement: React.FC = () => {
   const [applyFilter, setApplyFilter] = useState<boolean>(false);
   const [filterApplied, setFilterApplied] = useState<boolean>(false);
   const applyFilters = useCallback(() => {
+    let filterCompanyIdsString = "";
+    let filterTypeIdsString = "";
+    let filterSentimentsString = "";
+    filteredCompanies.forEach((element) => {
+      filterCompanyIdsString += element.id + ",";
+    });
+    filteredAnnouncements.forEach((element) => {
+      filterTypeIdsString += element.id + ",";
+    });
+    filteredSentiments.map((element) => {
+      filterSentimentsString = +element.name + ",";
+    });
     setApplyFilter(true);
     fetch(
-      "https://9a84ce1e-ff82-4b80-b2db-035d0769c3c2.mock.pstmn.io/api/annoucements?ex=BSE&cid=123,345&type=1,25&s=positive&from=2023-05-01&to=2023-05-01&page=1&o=20"
-    );
-  }, []);
+      `https://9a84ce1e-ff82-4b80-b2db-035d0769c3c2.mock.pstmn.io/api/annoucements?ex=BSE&cid=${filterCompanyIdsString}&type=${filterTypeIdsString}&s=${filterSentimentsString}&from=2023-05-01&to=2023-05-01&page=1&o=20`
+    )
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  }, [filteredCompanies, filteredAnnouncements, filteredSentiments]);
   return (
     <div>
       <h3 className="text-sm font-medium underline underline-offset-4 text-indigo-600 mt-4">
