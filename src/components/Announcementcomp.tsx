@@ -68,8 +68,12 @@ export const Sentiment: React.FC<Sentimentprop> = ({ type }) => {
 interface Sentimentprop {
   type: "positive" | "neutral" | "negative";
 }
+type selected = {
+  name: string;
+  id?: string;
+};
 interface Filter {
-  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
-  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
-  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
+  setFilteredSentiments: Dispatch<SetStateAction<selected[]>>;
+  setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;
+  setFilteredAnnouncements: Dispatch<SetStateAction<selected[]>>;
 }

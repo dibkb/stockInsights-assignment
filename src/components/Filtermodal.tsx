@@ -25,11 +25,11 @@ const RenderName: React.FC<RenderName> = ({
   const [nameSelect, setComanySelect] = useState<boolean>(selected);
   useEffect(() => {
     if (nameSelect) {
-      setFilteredList((prev) => [...prev, value]);
+      setFilteredList((prev) => [...prev, { name: value, id: id }]);
     } else {
-      setFilteredList((prev) => prev.filter((item) => item !== value));
+      setFilteredList((prev) => prev.filter((item) => item.name !== value));
     }
-  }, [nameSelect, setFilteredList, value]);
+  }, [nameSelect, setFilteredList, value, id]);
   return (
     <div
       onClick={() => {
@@ -216,24 +216,28 @@ const Filtermodal: React.FC<FilterModal> = ({
     </div>
   );
 };
+type selected = {
+  name: string;
+  id?: string;
+};
 type RenderName = {
   value: string;
   id?: string;
   selected: boolean;
-  setFilteredList: Dispatch<SetStateAction<string[]>>;
+  setFilteredList: Dispatch<SetStateAction<selected[]>>;
 };
 type FilterModal = {
-  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
-  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
-  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
+  setFilteredSentiments: Dispatch<SetStateAction<selected[]>>;
+  setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;
+  setFilteredAnnouncements: Dispatch<SetStateAction<selected[]>>;
 };
 type CompanyModal = {
-  setFilteredCompanies: Dispatch<SetStateAction<string[]>>;
+  setFilteredCompanies: Dispatch<SetStateAction<selected[]>>;
 };
 type AnnouncementModal = {
-  setFilteredAnnouncements: Dispatch<SetStateAction<string[]>>;
+  setFilteredAnnouncements: Dispatch<SetStateAction<selected[]>>;
 };
 type SentimentModal = {
-  setFilteredSentiments: Dispatch<SetStateAction<string[]>>;
+  setFilteredSentiments: Dispatch<SetStateAction<selected[]>>;
 };
 export default Filtermodal;

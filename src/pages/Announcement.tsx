@@ -3,11 +3,14 @@ import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
 import AlertProvider from "../context/AlertContext";
 import Allerts from "../components/Allerts";
 const Announcement: React.FC = () => {
-  const [filteredCompanies, setFilteredCompanies] = useState<string[]>([]);
-  const [filteredAnnouncements, setFilteredAnnouncements] = useState<string[]>(
-    []
-  );
-  const [filteredSentiments, setFilteredSentiments] = useState<string[]>([]);
+  const [filteredCompanies, setFilteredCompanies] = useState<selected[]>([]);
+  const [filteredAnnouncements, setFilteredAnnouncements] = useState<
+    selected[]
+  >([]);
+  const [filteredSentiments, setFilteredSentiments] = useState<selected[]>([]);
+  console.log("filteredCompanies", filteredCompanies);
+  console.log("filteredAnnouncements", filteredAnnouncements);
+  console.log("filteredSentiments", filteredSentiments);
   return (
     <AlertProvider>
       <div>
@@ -46,5 +49,8 @@ const Announcement: React.FC = () => {
     </AlertProvider>
   );
 };
-
+type selected = {
+  name: string;
+  id?: string;
+};
 export default Announcement;
