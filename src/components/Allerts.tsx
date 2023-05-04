@@ -7,16 +7,14 @@ const Allerts: React.FC = () => {
   const { alerts } = useContext(AlertContext);
   const formatDate = (date: string): string => {
     const newDate = new Date(String(date));
-    const options = {
+    const dateString = newDate.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
-    };
-    const dateString = newDate.toLocaleDateString("en-US", options);
+    });
     return dateString;
   };
-
   return (
     <>
       {alerts.map((element: typeAnnouncement) => {
