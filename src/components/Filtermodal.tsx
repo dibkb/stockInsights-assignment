@@ -142,12 +142,12 @@ const Filtermodal: React.FC<FilterModal> = ({
   const [showAnnouncements, setShowAnnouncements] = useState<boolean>(false);
   const [showSentiments, setShowSentiments] = useState<boolean>(false);
   return (
-    <div className="absolute w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
+    <div className="absolute sm:w-96 text-sm select-none bg-white border top-[120%] left-0 p-4 shadow-md rounded-md">
       {/* Company */}
       <main className="flex whitespace-nowrap gap-6 relative">
         <h3 className="font-medium">Company :</h3>
         <span
-          className="flex items-center gap-9 border-b pb-1 cursor-pointer"
+          className="flex items-center sm:gap-9 gap-6 border-b pb-1 cursor-pointer"
           onClick={() => {
             setShowCompanies((prev) => !prev);
             setShowAnnouncements(false);
@@ -169,7 +169,7 @@ const Filtermodal: React.FC<FilterModal> = ({
       <main className="flex whitespace-nowrap gap-6 mt-3 relative">
         <h3 className="font-medium">Announcemnet :</h3>
         <span
-          className="flex items-center gap-9 border-b pb-1 cursor-pointer"
+          className="flex items-center sm:gap-9 gap-6 border-b pb-1 cursor-pointer"
           onClick={() => {
             setShowAnnouncements((prev) => !prev);
             setShowCompanies(false);
@@ -193,7 +193,7 @@ const Filtermodal: React.FC<FilterModal> = ({
       <main className="flex whitespace-nowrap gap-6 mt-3 relative">
         <h3 className="font-medium">Sentiment :</h3>
         <span
-          className="flex items-center gap-9 border-b pb-1 cursor-pointer"
+          className="flex items-center sm:gap-9 gap-6 border-b pb-1 cursor-pointer"
           onClick={() => {
             setShowSentiments((prev) => !prev);
             setShowCompanies(false);
