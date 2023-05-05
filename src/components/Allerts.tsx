@@ -66,28 +66,30 @@ const Allerts: React.FC = () => {
           return (
             <main
               key={JSON.stringify(element.summary + id)}
-              className="flex gap-4 whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
+              className="flex flex-wrap sm:flex-nowrap sm:gap-4 gap-y-2 sm:gap-y-0 sm:whitespace-nowrap justify-between items-start text-sm border-b border-gray-300 pb-4 cursor-pointer"
             >
-              <h3 className="font-medium text-base basis-[12.92%]">
+              <h3 className="font-medium text-base sm:basis-[12.92%] basis-1/3 whitespace-nowrap">
                 {element.company_name}
               </h3>
-              <div className="basis-[17.56%]">
+              <div className="sm:basis-[17.56%] basis-2/3 whitespace-nowrap">
                 <h3 className="bg-gray-200 rounded-md px-3 py-1 w-min">
                   {element.type}
                 </h3>
               </div>
-              <div className="basis-[47.86%]">
+              <div className="sm:basis-[47.86%] my-3 sm:my-0">
                 <h3 className="font-semibold">{element.sub_type}</h3>
                 <h3 className="mt-1 whitespace-normal">{element.summary}</h3>
               </div>
-              <div className="basis-[9%]">
+              <div className="sm:basis-[9%] basis-1/3">
                 <Sentiment type={element.sentiment} />
               </div>
-              <div className="basis-[6.4%] flex flex-col gap-2">
-                <a href={element.source_url}>
+              <div className="sm:basis-[6.4%] basis-2/3 flex items-center sm:flex-col gap-2 self-center justify-around">
+                <a href={element.source_url} className="">
                   <AiOutlineFilePdf size={20} className={""} />
                 </a>
-                <h3 className="text-xs">{formatDate(element.created_at)}</h3>
+                <h3 className="text-xs whitespace-nowrap ">
+                  {formatDate(element.created_at)}
+                </h3>
               </div>
             </main>
           );

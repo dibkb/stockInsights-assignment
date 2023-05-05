@@ -56,7 +56,7 @@ const Announcement: React.FC = () => {
       )}
       {/* Table */}
       <main className="flex flex-col gap-4 mt-9">
-        <div className="flex justify-between items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
+        <div className="hidden sm:flex justify-between items-start text-xs font-semibold uppercase border-b border-gray-300 pb-4">
           <h3 className="basis-[12.92%]">Company</h3>
           <h3 className="basis-[17.56%]">Announcement Type</h3>
           <h3 className="basis-[47.86%]">Announcement Summary</h3>
