@@ -29,12 +29,12 @@ const Announcement: React.FC = () => {
       <h3 className="text-sm font-medium underline underline-offset-4 text-indigo-600 mt-4">
         Special Situation Tracker
       </h3>
-      <main className="flex justify-between mt-9 items-center">
+      <main className="flex flex-col lg:flex-row justify-between mt-9 lg:items-center gap-y-3">
         <div>
-          <h4>Total Announcements</h4>
+          <h4 className="whitespace-nowrap">Total Announcements</h4>
           <h2 className="text-5xl mt-1">700</h2>
         </div>
-        <main className="flex items-end gap-4">
+        <main className="flex sm:items-end sm:gap-4 whitespace-nowrap flex-wrap sm:flex-nowrap sm:flex-row items-start gap-y-3 sm:gap-y-0">
           <Searchbox />
           <Filter
             setFilteredCompanies={setFilteredCompanies}

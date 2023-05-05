@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <div className="text-gray-800">
       <Navbar />
-      <div className="sm:container max-w-[90%] mx-auto">
+      <div className="xl:container max-w-[90%] mx-auto">
         <Outlet />
       </div>
     </div>
