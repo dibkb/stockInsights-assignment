@@ -3,6 +3,7 @@ import { AlertContext } from "../context/AlertContext";
 import { Datepicker, Filter, Searchbox } from "../components/Announcementcomp";
 import AlertProvider from "../context/AlertContext";
 import Allerts from "../components/Allerts";
+import { arrayToId, arrayToName } from "../utils/utils";
 const Announcement: React.FC = () => {
   const { alerts, setAlerts } = useContext(AlertContext);
   const [filteredCompanies, setFilteredCompanies] = useState<selected[]>([]);
@@ -13,18 +14,9 @@ const Announcement: React.FC = () => {
   const [applyFilter, setApplyFilter] = useState<boolean>(false);
   // const [filterApplied, setFilterApplied] = useState<boolean>(false);
   const applyFilters = useCallback(() => {
-    let filterCompanyIdsString = "";
-    let filterTypeIdsString = "";
-    let filterSentimentsString = "";
-    filteredCompanies.forEach((element) => {
-      filterCompanyIdsString += element.id + ",";
-    });
-    filteredAnnouncements.forEach((element) => {
-      filterTypeIdsString += element.id + ",";
-    });
-    filteredSentiments.map((element) => {
-      filterSentimentsString = +element.name + ",";
-    });
+    const filterCompanyIdsString = arrayToId(filteredCompanies);
+    const filterTypeIdsString = arrayToId(filteredAnnouncements);
+    const filterSentimentsString = arrayToName(filteredSentiments);
     setApplyFilter(true);
     fetch(
       `https://9a84ce1e-ff82-4b80-b2db-035d0769c3c2.mock.pstmn.io/api/annoucements?ex=BSE&cid=${filterCompanyIdsString}&type=${filterTypeIdsString}&s=${filterSentimentsString}&from=2023-05-01&to=2023-05-01&page=1&o=20`
